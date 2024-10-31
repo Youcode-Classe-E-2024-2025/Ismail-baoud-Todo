@@ -10,37 +10,64 @@
 </head>
 
 <body class="bg-indigo-300 font-serif">
-    <button class="bott rounded-3xl bg-blue-500 w-32 h-6 m-6">Add new task + </button>
-    <div class="grid grid-rows-4">
-        <section class="grid grid-cols-3 m-12">
-            <main class="col-span-3 grid grid-cols-3 gap-3">
-                <div class=" div1 h-auto w-full bg-indigo-500 col-span-1">
+    <button id="bottone" class=" rounded-3xl bg-blue-500 w-32 h-6 m-6" type="button">Add new task + </button>
+    <div class="">
+        <section class="grid grid-cols-3 m-12 ">
+            <main class="col-span-3 grid grid-cols-3 gap-3 ">
+                <div class="h-fit w-full bg-indigo-500 col-span-1">
                     <h1 class="text-center bg-red-400 font-serif">To Do</h1>
+                    <div class="h-96 overflow-auto">
+                    <div id="todo" class="w-auto overflow-y-auto">
+                           
+                    </div>
                 </div>
-                <div class="h-auto w-full bg-indigo-500 col-span-1">
+                </div>
+                <div class="w-full bg-indigo-500 col-span-1">
                     <h1 class="text-center bg-orange-400 font-serif">Doing</h1>
+                    <div class="h-96 overflow-auto scrollbar-hidden">
+                    <div id="Inprogress">
+
+                    </div>
                 </div>
-                <div class="h-auto w-full bg-indigo-500 col-span-1">
+                </div>
+                <div class="w-full bg-indigo-500 col-span-1">
                     <h1 class="text-center bg-green-400 font-serif">Done</h1>
+                    <div class="h-96 overflow-auto">
+                    <div id="done" class="">
+                        <button onclick="this.parentElement.remove()"><img class="inline h-4 w-4" src="assets/images/sup.png" alt=""></button>
+                    </div>
+                </div>
                 </div>
             </main>
         </section>
-        <div method="post" class="add grid grid-rows-5 hidden grid-cols-5 absolute left-1/3 top-1/4  bg-violet-400 col-span-1 h-auto w-96">
-            <label class="block col-start-3 col-span-2" for="titre">titre</label>
-            <input name="titre" id="titre" class="block mb-2 justify-items-center col-start-2 col-span-3" placeholder="titre" type="text" />
-            <label for="description" class="col-start-3 col-span-2">description</label>
-            <input name="description" id="description" class="block col-start-2 col-span-3" placeholder="Description" type="text" />
-            <label for="death-line" class=" col-start-3 col-span-2">death line</label>
-            <input name="death-line" class="block col-start-2 col-span-3" type="datetime-local">
-            <label class="col-start-3 row-start-7">status:</label>
-            <div class="row-start-8">
-                <labe class="block text-red-600" for="p1"><input id="p1" class="inline col-start-1" type="radio" name="check">p1</label>
-            <label class="block text-orange-600" for="p2"><input id="p2" class="inline col-start-1" type="radio" name="check">p2</label>
-            <label class="block text-lime-600" for="p3"><input id="p3" class="inline col-start-1" type="radio" name="check">p3</label>
+        <form id="form" class=" flex items-center justify-center text-center add hidden  absolute  left-1/3 top-1/4  bg-violet-400 col-span-1 h-96 w-80">
+           <div class="space-y-4">
+            <label class="block mt-3 " for="titre">titre:</label>
+            <input value="titre" name="titre" id="titre" class="block mt-0 " placeholder="titre" type="text" />
+        
+            <label for="description" class=" border-none">description:</label>
+            <input value="description" name="description" id="description" class="block " placeholder="Description" type="text" />
+    
+            <label for="death-line" class="">death-line:</label>
+            <input value="death-line" name="death-line" id="death-line" class="block " type="date">
+    
+            <label class="">status:</label>
+            <select id="important" class=" block row-start-8">
+                <option class="block text-red-500" for="p1">tres important</option>
+                <option class="block text-orange-500" for="p2">important moyenne</option>
+                <option class="block text-green-500" for="p3"> ne important pas</option>
+                </select>
+                <label for="">place:</label>
+            <select name="places" id="places" class="block">
+                <option value="todo" >todo</option>
+                <option value="in progress">in progress</option>
+                <option value="done">done</option>
+            </select>
+                <button id="bottonsubmit" class="inline w-24 h-8 bg-blue-500 rounded-3xl mt-3 mb-3" type="submit">add</button>
+                <button id="cancelBotton" class="addTask inline w-24 h-8 bg-blue-500 rounded-3xl mt-3 mb-3" type="button">cancel</button>
+
             </div>
-            <button class="block row-start-9  col-start-2 col-span-2 w-24 h-8 bg-blue-500 rounded-3xl mt-3 mb-3" type="submit">add</button>
-            <button class="addTask row-start-9 block  col-start-4 col-span-2 w-24 h-8 bg-blue-500 rounded-3xl mt-3 mb-3" type="submit">concel</button>
-    </div>
+        </form>
     </div>
     <script src="assets/js/main.js"></script>
 </body>
