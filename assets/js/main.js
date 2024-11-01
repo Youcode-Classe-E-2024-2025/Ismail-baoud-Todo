@@ -1,14 +1,13 @@
 const botton1 = document.getElementById('bottone');
+const botton2 = document.querySelector('.add');
 botton1.addEventListener('click', () => {
-    const botton = document.querySelector('.add');
-    botton.classList.remove('hidden');
-});
+        botton2.classList.remove('hidden');
+    });
 
 const cancelbotton = document.getElementById('cancelBotton');
-const botton2 = document.querySelector('.add');
-cancelbotton.addEventListener('click', () => {
-    botton2.classList.add('hidden');
-});
+    cancelbotton.addEventListener('click', () => {
+        botton2.classList.add('hidden');
+    });
 
 const todoTasks = [
     {
@@ -52,14 +51,17 @@ function affichage(taches) {
         let colorP;
         if (tach.catalog === 'tres important') {
             colorP = 'text-red-500';
-        } else if (tach.catalog === 'important moyenne') {
+        } 
+        else if (tach.catalog === 'important moyenne') {
             colorP = 'text-orange-500';
-        } else {
+        } 
+        else {
             colorP = 'text-green-500';
         }
 
         const tachtext = 
         `<div class="bg-white rounded-lg text-center m-3 mb-5" data-id="${tach.id}">
+            <button class="delettach"><img class="inline h-4 w-4" src="assets/images/sup.png" alt=""></button>
             <h3 class="${colorP}">${tach.catalog}</h3>
             <p><strong>Title:</strong> ${tach.titre}</p>
             <p><strong>Description:</strong> ${tach.description}</p>
@@ -74,12 +76,29 @@ function affichage(taches) {
             done.innerHTML += tachtext;
         }
     });
+
+    document.querySelectorAll('.delettach').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const tachElem = event.target.closest('div');
+            const idtach = parseInt(tachElem.getAttribute('data-id'));
+            deletTask(idtach);
+            affichage(todoTasks);
+        });
+    });
 }
+
+function deletTask(id) {
+    const plac = todoTasks.findIndex(tach => tach.id === id);
+    if (plac !== -1) {
+        todoTasks.splice(plac, 1); 
+    }
+}
+
 affichage(todoTasks);
 
 document.getElementById('form').addEventListener('submit', function(event) {
     event.preventDefault();
-    botton2.classList.add('hidden');
+    
 
     const titre = document.getElementById('titre').value;
     const description = document.getElementById('description').value;
@@ -98,5 +117,5 @@ document.getElementById('form').addEventListener('submit', function(event) {
 
     todoTasks.unshift(formValues);
     affichage(todoTasks);
-    console.log(formValues);
+    botton2.classList.add('hidden');
 });
