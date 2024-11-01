@@ -2,6 +2,7 @@ const botton1 = document.getElementById("bottone");
 const botton2 = document.querySelector(".add");
 botton1.addEventListener("click", () => {
   botton2.classList.remove("hidden");
+  
 });
 
 const cancelbotton = document.getElementById("cancelBotton");
@@ -44,7 +45,7 @@ let idCount = 4;
 
 function affichage(taches) {
 
-    
+
   todo.innerHTML = "";
   inProgress.innerHTML = "";
   done.innerHTML = "";
@@ -57,24 +58,23 @@ function affichage(taches) {
     let colorP;
 
     if (tach.catalog === "tres important") {
-      colorP = "text-red-500";
+      colorP = "bg-red-500";
     } 
     
     else if (tach.catalog === "important moyenne") {
-      colorP = "text-orange-500";
+      colorP = "bg-orange-500";
     } 
     
     else {
-      colorP = "text-green-500";
+      colorP = "bg-green-500";
     }
 
-
-    const tachtext = `<div class="bg-white rounded-lg text-center m-3 mb-5" data-id="${
+    const tachtext = `<div grid grid-cols-5 grid-rows-5 class="bg-gray-100 rounded-lg text-center m-3 mb-5" data-id="${
       tach.id
     }">
             <button class="delettach"><img class="inline h-4 w-4" src="assets/images/sup.png" alt=""></button>
             
-           <select class="modifiertach">
+           <select class="modifiertach font-serif bg-gray-100">
                  <option value="todo" ${
                    tach.places === "todo" ? "selected" : ""
                  }>todo</option>
@@ -85,10 +85,11 @@ function affichage(taches) {
                    tach.places === "done" ? "selected" : ""
                  }>done</option>
             </select>
-            <p class="border-solid border-black border-2 font-bold font-mono"> ${
+            <h3 class="h-2 block ${colorP}  rounded-r-lg rounded-l-lg"></h3>
+            <p class="font-extrabold font-mono pb-4 pt-2"> ${
               tach.titre
             }</p>
-            <p class="b font-normal font-mono"> ${tach.description}</p>
+            <p class="b font-normal font-mono text-left"> ${tach.description}</p>
             <p> ${tach.deathline}</p>
         </div>`;
     if (tach.places === "todo") {
@@ -103,15 +104,13 @@ function affichage(taches) {
     }
   });
 
+    let todocont = document.getElementById('todocont');
+    todocont.innerText = `${contTODO}`;
+    let doingcont = document.getElementById('doingcont');
+    doingcont.innerText = `${contDOING}`;
+    let donecont = document.getElementById('donecont');
+    donecont.innerText = `${contDONE}`;
 
-
-
-
-  let statistic = document.getElementById("statistic");
-  statistic.innerHTML = `<p>Total Tasks: ${contDONE + contTODO + contDOING}</p>
-            <p>Tasks in Todo: ${contTODO}</p>
-            <p>Tasks in in progress: ${contDOING}</p>
-            <p>Tasks in done: ${contDONE}</p>`;
   document.querySelectorAll(".delettach").forEach((button) => {
     button.addEventListener("click", (event) => {
       const tachElem = event.target.closest("div");
@@ -153,11 +152,19 @@ function changestatus(id, new_value) {
   }
 }
 
+function clearform() {
+
+    document.getElementById("titre").value ="";
+    document.getElementById("description").value = "";
+    document.getElementById("death-line").value = "";
+    document.getElementById("important").value ="";
+    document.getElementById("places").value = "";
+
+}
 
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
-
   const titre = document.getElementById("titre").value;
   const description = document.getElementById("description").value;
   const deathline = document.getElementById("death-line").value;
@@ -173,8 +180,10 @@ document.getElementById("form").addEventListener("submit", function (event) {
     id: idCount++,
   };
 
+
   todoTasks.unshift(formValues);
   affichage(todoTasks);
   botton2.classList.add("hidden");
+  clearform()
 });
 affichage(todoTasks);

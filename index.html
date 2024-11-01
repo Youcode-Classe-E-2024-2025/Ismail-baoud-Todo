@@ -7,75 +7,91 @@
     <title>canban</title>
     <!-- <link href="output.css" rel="stylesheet"> -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
 </head>
 
-<body class="bg-indigo-300 font-serif">
-    <button id="bottone" class=" rounded-3xl bg-blue-500 w-32 h-6 m-6" type="button">Add new task + </button>
+<body class="bg-gray-50" style=" font-family: Playwrite GB S, cursive">
+    
 
     <section id="opa" class="grid grid-cols-3 ml-12 mr-12 ">
-        <section id="statistic" class="bg-slate-200 w-64 h-32 mb-6 col-start-2 text-center">
-        </section>
+        <div class="pt-6 pl-16">
+            <p  class=" font-serif inline text-red-600">TASK</p>
+            <p class="font-extrabold inline text-green-600">FLOW</p>
+        </div>
+        <button id="bottone" class="inline col-start-3 ml-24 mb-10 h-12 rounded-3xl bg-blue-400 w-32 mt-6 text-white" type="button">+ Add new task </button>
+        <!-- <section id="statistic" class="bg-slate-200 w-64 h-32 mb-6 col-start-2 text-center">
+        </section> -->
         <main class="col-span-3 grid grid-cols-3 gap-3 ">
-            <div class="h-fit w-full bg-indigo-500 col-span-1">
-                <h1 class="text-center bg-red-400 font-serif">To Do</h1>
-                <div class="h-96 overflow-auto">
+            <div class=" w-full rounded-xl bg-red-100 col-span-1">
+                <h1 class="text-center mb-2 rounded-md text- bg-gray-300">To Do</h1>
+                <p id="todocont" class="text-center h-6 w-6 rounded-3xl text-gray-300 bg-slate-950"></p>
+                <div class="h-80">
                     <div id="todo" class="w-auto overflow-y-auto">
 
                     </div>
-                    <div></div>
                 </div>
             </div>
-            <div class="w-full bg-indigo-500 col-span-1">
-                <h1 class="text-center bg-orange-400 font-serif">Doing</h1>
-                <div class="h-96 overflow-auto scrollbar-hidden">
+            <div class="w-full rounded-xl bg-orange-100 col-span-1">
+                <h1 class="text-center mb-2 rounded-md bg-gray-300">Doing</h1>
+                <p id="doingcont" class="text-center h-6 w-6 rounded-3xl text-teal-50 bg-slate-950"></p>
+                <div class="h-80 overflow-auto scrollbar-hidden">
                     <div id="Inprogress">
 
                     </div>
                 </div>
             </div>
-            <div class="w-full bg-indigo-500 col-span-1">
-                <h1 class="text-center bg-green-400 font-serif">Done</h1>
-                <div class="h-96 overflow-auto">
+            <div class="w-full rounded-xl bg-green-100 col-span-1">
+                <h1 class="text-center mb-2 bg-gray-300 rounded-md">Done</h1>
+                <p id="donecont" class="text-center h-6 w-6 rounded-3xl text-teal-50 bg-slate-950"></p>
+                <div class="h-80 overflow-auto">
                     <div id="done" class="">
-                        <button onclick="this.parentElement.remove()"><img class="inline h-4 w-4"
-                                src="assets/images/sup.png" alt=""></button>
+                        
                     </div>
                 </div>
             </div>
         </main>
     </section>
-    <form id="form"
-        class=" flex items-center justify-center text-center add hidden  absolute  left-1/3 top-1/4  bg-violet-400 col-span-1 h-auto w-80 rounded-2xl shadow-md">
+    <div id="form" class="add w-full h-screen absolute left-0 top-0 justify-center flex backdrop-blur items-center font-serif">
+    <form 
+        class=" flex items-center justify-center text-center left-1/3 top-1/4  bg-violet-400 col-span-1 h-auto w-80 rounded-2xl shadow-md">
         <div class="space-y-4">
-            <label class="block mt-3 " for="titre">titre:</label>
-            <input value="titre" id="titre" class="block mt-0 " placeholder="titre" type="text" />
+            <label class="block mt-3 " for="titre">titre :</label>
+            <input id="titre" required class="block h-6 w-56 outline-none mt-0 text-xl text-center" placeholder="titre" type="text" />
 
-            <label for="description" class=" border-none">description:</label>
-            <textarea value="description" id="description" class="block " placeholder="Description"
+            <label for="description" class=" border-none">description :</label>
+            <textarea id="description" required class=" w-56 resize-none block outline-none text-xl text-center" placeholder="Description"
                 type="text"></textarea>
 
-            <label for="death-line" class="">death-line:</label>
-            <input value="death-line" id="death-line" class="block " type="date">
+            <label for="death-line" class="">death-line :</label>
+            <input id="death-line" required class="block w-56 text-center" type="date">
 
-            <label class="">status:</label>
-            <select id="important" class=" block row-start-8">
+            <label class="">priority :</label>
+            <select id="important" class=" inline row-start-8 w-5">
                 <option class="block text-red-500" for="p1">tres important</option>
                 <option class="block text-orange-500" for="p2">important moyenne</option>
                 <option class="block text-green-500" for="p3"> ne important pas</option>
             </select>
-            <label>place:</label>
-            <select name="places" id="places" class="block">
-                <option value="todo">todo</option>
-                <option value="in progress">in progress</option>
-                <option value="done">done</option>
+            <div>
+            <label class="inline">status :</label>
+            <select name="places" id="places" class="inline text-xs">
+                <option value="todo">To do</option>
+                <option value="in progress">In progress</option>
+                <option value="done">Done</option>
             </select>
-            <button id="bottonsubmit" class="inline  w-24 h-8 bg-blue-500 rounded-3xl mt-3 mb-3"
+        </div>
+            <div>
+                <button id="bottonsubmit" class="inline  w-24 h-8 bg-green-500 rounded-3xl mt-1 mb-3"
                 type="submit">add</button>
-            <button id="cancelBotton" class="addTask inline w-24 h-8 bg-blue-500 rounded-3xl mt-3 mb-3"
+                <button id="cancelBotton" class="addTask inline w-24 h-8 bg-red-400 rounded-3xl mt-1 mb-3"
                 type="button">cancel</button>
+            </div>
 
 
     </form>
+</div>
 
     <script src="assets/js/main.js"></script>
 </body>
