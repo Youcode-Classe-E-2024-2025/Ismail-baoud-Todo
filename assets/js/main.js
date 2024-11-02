@@ -69,28 +69,21 @@ function affichage(taches) {
       colorP = "bg-green-500";
     }
 
-    const tachtext = `<div grid grid-cols-5 grid-rows-5 class="bg-gray-100 rounded-lg text-center m-3 mb-5" data-id="${
-      tach.id
-    }">
-            <button class="delettach"><img class="inline h-4 w-4" src="assets/images/sup.png" alt=""></button>
-            
-           <select class="modifiertach font-serif bg-gray-100">
-                 <option value="todo" ${
-                   tach.places === "todo" ? "selected" : ""
-                 }>todo</option>
-                 <option value="in progress" ${
-                   tach.places === "in progress" ? "selected" : ""
-                 }>in progress</option>
-                 <option value="done" ${
-                   tach.places === "done" ? "selected" : ""
-                 }>done</option>
+    const tachtext = 
+    `<div grid relative grid-cols-5 grid-rows-5 class="bg-gray-100 rounded-lg text-center m-3 mb-5" data-id="${tach.id}">
+            <select class="modifiertach font-serif bg-gray-100">
+             <option value="todo" ${
+                tach.places === "todo" ? "selected" : ""}>à faire</option>
+                 <option value="in progress" ${tach.places === "in progress" ? "selected" : ""}>en cours</option>
+                 <option value="done" ${tach.places === "done" ? "selected" : ""
+                 }>terminé</option>
             </select>
             <h3 class="h-2 block ${colorP}  rounded-r-lg rounded-l-lg"></h3>
-            <p class="font-extrabold font-mono pb-4 pt-2"> ${
-              tach.titre
+            <p class="font-extrabold font-mono pb-4 pt-2"> ${tach.titre
             }</p>
             <p class="b font-normal font-mono text-left"> ${tach.description}</p>
-            <p> ${tach.deathline}</p>
+            <p class="text-gray-600 block font-mono"> ${tach.deathline}</p>
+            <button class="delettach"><img class="block h-4 w-4 " src="assets/images/sup.png" alt="image de supremer"></button>
         </div>`;
     if (tach.places === "todo") {
       todo.innerHTML += tachtext;
@@ -110,6 +103,8 @@ function affichage(taches) {
     doingcont.innerText = `${contDOING}`;
     let donecont = document.getElementById('donecont');
     donecont.innerText = `${contDONE}`;
+    let totalTasks = document.getElementById('total');
+    totalTasks.innerText = `${contDONE+contDOING+contTODO}`;
 
   document.querySelectorAll(".delettach").forEach((button) => {
     button.addEventListener("click", (event) => {
@@ -158,7 +153,7 @@ function clearform() {
     document.getElementById("description").value = "";
     document.getElementById("death-line").value = "";
     document.getElementById("important").value ="";
-    document.getElementById("places").value = "";
+    document.getElementById("places").value = "todo";
 
 }
 
@@ -179,8 +174,6 @@ document.getElementById("form").addEventListener("submit", function (event) {
     places: places,
     id: idCount++,
   };
-
-
   todoTasks.unshift(formValues);
   affichage(todoTasks);
   botton2.classList.add("hidden");
